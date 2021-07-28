@@ -1,0 +1,191 @@
+﻿@using MyEvernote.Entities
+@using MyEvernote.WebApp.Models
+ 
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Shop Homepage - Start Bootstrap Template</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <!-- Custom CSS -->
+    <link href="~/Content/shop-homepage.css" rel="stylesheet" />
+
+    <script src="~/Scripts/jquery-3.1.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    @{
+        EvernoteUser user = CurrentSession.user;
+
+        //if(Session["login"] != null)
+        //{
+        //    user = Session["login"] as EvernoteUser;
+        //}
+    }
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Menu</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/Home/Index">My Evernote</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+
+                    @if (user != null)
+                    {
+                        <li class="dropdown">
+                            <a href="/Note/MyNotes" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                <span class="glyphicon glyphicon-wrench"></span>
+                                Admin <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="/Note/Create"><span class="glyphicon glyphicon-plus"></span>Add Note</a>
+                                </li>
+                                <li role="separator" class="divider"></li>
+
+                                <li>
+                                    <a href="/Note/Index"><span class="glyphicon glyphicon-th-list"></span>My Notes</a>
+                                </li>
+
+                                <li>
+                                    <a href="/Note/MyLikedNotes"><span class="glyphicon glyphicon-heart"></span>My Liked Notes</a>
+                                </li>
+
+                                @if (user.IsAdmin)
+                                {
+                                    <li role="separator" class="divider"></li>
+                                    <li>
+                                        @Bootstrap.LinkMenu("/Category/Create", "plus", "Add Category")                                       
+                                    </li>
+
+                                    <li>
+                                        <a href="/Category/Index"><span class="glyphicon glyphicon-th-list"></span>Categories</a>
+                                    </li>
+
+                                    <li role="separator" class="divider"></li>
+                                    <li>
+                                        <a href="/EvernoteUser/Create"><span class="glyphicon glyphicon-plus"></span>Add User</a>
+                                    </li>
+
+                                    <li>
+                                        <a href="/EvernoteUser/Index"><span class="glyphicon glyphicon-th-list"></span>Users</a>
+                                    </li>
+                                }
+
+                            </ul>
+                        </li>
+                    }
+
+                    <li>
+                        <a href="/Home/MostLiked">
+                            <span class="glyphicon glyphicon-star"></span>
+                            Most Liked
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/Home/Index">
+                            <span class="glyphicon glyphicon-th-list"></span>
+                            Last Articles
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/Home/About">
+                            <span class="glyphicon glyphicon-info-sign"></span>
+                            About Us
+                        </a>
+                    </li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    @if (user == null)
+                    {
+                <li>
+                    <a href="/Home/Login">
+                        <span class="glyphicon glyphicon-log-in"></span>
+                        Login
+                    </a>
+                </li>
+
+                                <li>
+                                    <a href="/Home/Register">
+                                        <span class="glyphicon glyphicon-user"></span>
+                                        Register
+                                    </a>
+                                </li>}
+
+                    @if (user != null)
+                    {
+                        <li class="dropdown">
+                            <a href="/Home/ShowProfile" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                <span class="glyphicon glyphicon-user"></span>@user.Username <span class="caret"></span>
+                            </a>
+
+                            <ul class="dropdown-menu">
+                                <li><a href="/Home/ShowProfile"><span class="glyphicon glyphicon-user"></span>Show Profile</a>
+                                </li>
+                                <li role="separator" class="divider"></li>
+                                
+                                <li><a href="/Home/EditProfile"><span class="glyphicon glyphicon-edit"></span>Edit Profile</a>
+                                </li>
+
+                                <li>
+                                    <a href="/Home/DeleteProfile" onclick="return confirm('Are you sure to delete this account ?');"><span class="glyphicon glyphicon-trash"></span>Delete Profile</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li>
+                             <a href="/Home/Logout">
+                                 <span class="glyphicon glyphicon-log-out"></span>
+                                 Logout
+                             </a>
+                         </li>
+                      }
+
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    @RenderBody() <!-- Sayfanın Layout ile çalışmasını sağlar-->
+
+    @RenderSection("footer", required : false)
+    <!-- /.container -->
+
+
+</body>
+
+</html>

@@ -1,0 +1,16 @@
+﻿@{
+    ViewBag.Title = "Access Denied !!!";
+}
+
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+
+        <h1><span class="glyphicon glyphicon-remove-circle"></span> Access Denied</h1>
+        <p>
+            You are not authorized to access this page.
+            <br /><br />
+            @Bootstrap.LinkButton("/Home/Index", "primary", "", "", "home", " Home Page!")
+        </p>
+
+    </div>
+</div>

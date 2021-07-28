@@ -1,0 +1,32 @@
+﻿@{
+    ViewBag.Title = "Error Occured";
+}
+
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+
+        @{
+            Exception ex = null;
+
+            if (TempData["LastError"] != null)
+            {
+                ex = TempData["LastError"] as Exception;
+            }
+        }
+
+        <h1><span class="glyphicon glyphicon-remove"></span> Hata Oluştu</h1>
+        <p>
+            An error has occurred, please contact the site administrator.
+            <br /><br /><br />
+            @if (ex != null)
+            {
+                <strong>Error Detail : </strong>
+                @ex.Message
+                <br /><br /><br />
+            }
+            @Bootstrap.LinkButton("/Home/Index", "default", "", "", "home", " Home Page!")
+            @Bootstrap.LinkButton("mailto:bariskocaman5592@gmail.com", "primary", "", "", "envelope", " Send Email")
+        </p>
+
+    </div>
+</div>

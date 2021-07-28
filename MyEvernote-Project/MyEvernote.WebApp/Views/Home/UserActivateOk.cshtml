@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewBag.Title = "Account Activated";
+}
+
+<link href="~/Content/login-register.css" rel="stylesheet" />
+
+<section class="login-info">
+    <div class="container">
+        <div class="row main">
+            <div class="form-header">
+                <h1 class="text-center ">You are being redirected!!!</h1>
+            </div>
+            <div class="main-content">
+
+                <div class="text-success">
+                    <h2><span class="input-group-ok"></span>&nbsp;&nbsp;&nbsp;Your Account is Activated</h2>
+                    <hr />
+                    <p class="text-justify">
+                        Your Account has been activated. You can share notes and like others now...
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<script>
+    $(function () {
+        $("footer").parent().hide();
+
+        setTimeout(function () {
+            window.location = "/Home/Index";
+        }, 10000);
+    });
+</script>

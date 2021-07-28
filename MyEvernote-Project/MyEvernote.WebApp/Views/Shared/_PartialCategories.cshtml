@@ -1,0 +1,21 @@
+﻿@using MyEvernote.BusinessLayer.Concretes
+@using MyEvernote.Entities
+@using MyEvernote.WebApp.Models 
+
+@{
+    List<Category> categoryList = CacheHelper.GetCategoriesFromCache();
+
+    //CategoryManager category = new CategoryManager();
+    //List<Category> categoryList = category.List();
+}
+
+
+<p class="lead">Categories</p>
+<div class="list-group">
+    <a href="@Url.Action("Index", "Home")" class="list-group-item"><span class="glyphicon glyphicon-arrow-right"></span>All</a>
+
+    @foreach(Category cat in categoryList)
+    {
+        <a href="/Home/ByCategory/@cat.Id" title="@cat.Description" class="list-group-item"><span class="glyphicon glyphicon-arrow-right"></span>@cat.Title</a>
+    }
+</div>
